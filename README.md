@@ -1,4 +1,4 @@
-# Frontend Mentor - E-commerce product page
+# Frontend Mentor - Sección de comentarios interactivos
 Este proyecto es la solución a uno de los desafíos de Frontend Mentor.
 
 ## El desafio
