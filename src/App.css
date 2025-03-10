@@ -1,0 +1,326 @@
+:root {
+
+  --Moderateblue: hsl(238, 40%, 52%);
+  --SoftRed: hsl(358, 79%, 66%);
+  --Lightgrayishblue: hsl(239, 57%, 85%);
+  --Palered: hsl(357, 100%, 86%);
+
+  --Darkblue: hsl(212, 24%, 26%);
+  --GrayishBlue: hsl(211, 10%, 45%);
+  --Lightgray: hsl(223, 19%, 93%);
+  --Verylightgray: hsl(228, 33%, 97%);
+  --White: hsl(0, 0%, 100%);
+  font-family: Rubik;
+
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: .5rem;
+}
+
+.comment-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: var(--White);
+  border-radius: 15px;
+  color: var(--GrayishBlue);
+  gap: 1rem;
+  padding: 1rem;
+
+
+}
+
+.scorer {
+  display: flex;
+  flex-direction: column;
+  padding: .5rem;
+  background-color: var(--Lightgray);
+  border-radius: 8px;
+  height: min-content;
+  width: 1rem;
+  text-align: center;
+}
+
+.scorer img:hover {
+  cursor: pointer;
+  filter: brightness(.5)
+}
+
+.score {
+  color: var(--Moderateblue);
+  font-weight: 500;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.user-avatar {
+  height: 2.5rem;
+}
+
+.comment-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-name {
+  font-weight: 500;
+  color: var(--Darkblue);
+}
+
+.reply {
+  border: none;
+  margin-left: auto;
+  justify-self: right;
+  background-color: transparent;
+  color: var(--Moderateblue);
+  font-weight: 500;
+  font-family: Rubik;
+  font-size: 1rem;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+
+}
+
+.reply svg {
+  fill: var(--Moderateblue);
+}
+
+.reply:hover {
+  cursor: pointer;
+  color: var(--Lightgrayishblue);
+
+  svg {
+    fill: var(--Lightgrayishblue);
+  }
+}
+
+.comment {
+
+  max-width: 60ch;
+
+}
+
+.add-comment {
+  display: flex;
+  align-items: start;
+  background-color: var(--White);
+  border-radius: 15px;
+  color: var(--GrayishBlue);
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.add-comment textarea {
+  border: solid 1px var(--Lightgray);
+  font-family: Rubik;
+  border-radius: 8px;
+  width: 100%;
+  height: 5rem;
+  resize: none;
+
+}
+.add-comment textarea:focus{
+   outline: solid 1.5px var(--Darkblue);
+}
+
+.your-avatar {
+  height: 3rem;
+}
+
+.send {
+  border: none;
+  background-color: var(--Moderateblue);
+  color: var(--Verylightgray);
+  font-family: Rubik;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: .8rem 1.5rem;
+  height: min-content;
+
+}
+.send:hover{
+  background-color: var(--Lightgrayishblue);
+  cursor: pointer;
+}
+
+.thread {
+  border-left: solid 2px var(--Lightgray);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+  padding-left: 1rem;
+
+}
+
+.reply-comment {
+  max-width: 50ch;
+}
+
+.reply-to {
+  color: var(--Moderateblue);
+  font-weight: 500;
+}
+
+.you {
+  background-color: var(--Moderateblue);
+  color: var(--Verylightgray);
+  font-weight: 500;
+  padding: .2rem .5rem;
+  border-radius: 5px;
+}
+
+.my-user-icons {
+  display: flex;
+  gap: 2rem;
+  justify-self: flex-end;
+  margin-left: auto;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+
+.delete {
+  color: var(--SoftRed);
+  font-weight: 500;
+}
+.delete svg{
+  fill: var(--SoftRed);
+}
+.delete:hover{
+  cursor: pointer;
+  color: var(--Palered);
+  svg{
+    fill: var(--Palered);
+  }
+
+}
+
+.edit {
+  color: var(--Moderateblue);
+  font-weight: 500;
+
+}
+.edit svg{
+  fill: var(--Moderateblue);
+}
+.edit:hover{
+  cursor: pointer;
+  color: var(--Lightgrayishblue);
+  svg{
+    fill: var(--Lightgrayishblue);
+  }
+}
+
+textarea {
+  width: 100%;
+  font-family: Rubik;
+  border-radius: 10px;
+  border-style: none;
+  border: solid 1px var(--Lightgrayishblue);
+  height: 5rem;
+  padding: 1rem;
+  color: var(--GrayishBlue);
+}
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.505);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+
+}
+
+.delete-card {
+  background-color: var(--White);
+  padding: 1.5rem;
+  border-radius: 8px;
+  width: min-content;
+}
+
+.delete-card p:first-of-type {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--Darkblue);
+  margin: 0;
+}
+
+.delete-card p:last-of-type {
+  font-size: .9rem;
+  color: var(--GrayishBlue);
+}
+
+.delete-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.no-cancel {
+  font-family: Rubik;
+  color: var(--White);
+  background-color: var(--GrayishBlue);
+  border: none;
+  border-radius: 8px;
+  padding: .7rem 1.5rem;
+  width: max-content;
+
+}
+
+.yes-delete {
+  font-family: Rubik;
+  color: var(--White);
+  background-color: var(--SoftRed);
+  border: none;
+  border-radius: 8px;
+  padding: .7rem 1.5rem;
+  width: max-content;
+}
+
+.no-cancel:hover,
+.yes-delete:hover {
+  cursor: pointer;
+}
+
+@media (max-width:768px) {
+  .comment-container {
+    flex-direction: column-reverse;
+
+  }
+
+  .scorer {
+    align-self: flex-start;
+    flex-direction: row;
+    width: min-content;
+    gap: 1rem;
+    align-items: center;
+    height: 1.5rem;
+  }
+
+  .my-user-icons {
+    bottom: 1rem;
+    top: unset;
+  }
+
+  .reply {
+    bottom: 1rem;
+    top: unset;
+  }
+
+}
