@@ -1,8 +1,21 @@
-# React + Vite
+# Frontend Mentor - Sección de comentarios interactivos
+Este proyecto es la solución a uno de los desafíos de Frontend Mentor.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## El desafio
 
-Currently, two official plugins are available:
+Los usuarios deberían poder:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Crear, leer, editar y eliminar comentarios y respuestas.
+- Votar positivamente y negativamente en los comentarios.
+- Ver el diseño óptimo de la aplicación según el tamaño de la pantalla del dispositivo.
+- Observar los estados (hover) para todos los elementos interactivos de la página.
+
+### Creado con
+
+- HTML5
+- Estilos y propiedades CSS
+- Flexbox
+- Position absolute - relative
+- React Hooks
+- React + Javascript
+  
