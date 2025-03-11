@@ -6,7 +6,7 @@ import { CommentContext } from './assets/context/CommentContext';
 import CommentInfo from './assets/components/CommentInfo';
 import { ModalContext } from './assets/context/ModalContext';
 import Modal from './assets/components/Modal';
-import { MyUserIcons } from './assets/components/MyUserIcons';
+import MyUserIcons from './assets/components/MyUserIcons'
 import ReplyButton from './assets/components/ReplyButton';
 import Form from './assets/components/Form';
 import ReplyScorer from './assets/components/ReplyScorer';
@@ -17,9 +17,12 @@ import ReplyScorer from './assets/components/ReplyScorer';
 function App() {
 
   const { comments, setComments, myUser } = useContext(CommentContext)
+  const { deleteCModal, deleteRModal, setDeleteCModal, setDeleteRModal } = useContext(ModalContext)
+
   const [inputComment, setInputComment] = useState('')
   const [replyState, setReplyState] = useState({ isReplying: false, commentId: null, replyId: null });
-  const { deleteCModal, deleteRModal, setDeleteCModal, setDeleteRModal } = useContext(ModalContext)
+  const [commentToEdit, setCommentToEdit] = useState('')
+  const [editingState, setEditingState] = useState({isEditing:false, cId:null, rId: null})
 
 
 
@@ -123,6 +126,25 @@ function App() {
     setDeleteRModal({ isOpen: true, commentId, replyId });
   };
 
+  const editButton = (commentId) => {
+    const selectedComment = comments.find(comment => comment.id === commentId)
+    setCommentToEdit(selectedComment.content)
+    setEditingState({isEditing:true, cId: commentId, rId: null})
+
+  }
+  const handleEditform = (e) => {
+    if(editingState.cId != null){
+      e.preventDefault()
+      setComments(prevcomments => 
+        prevcomments.map(comment =>
+          comment.id === editingState.cId ? {...comment, content: commentToEdit} : comment
+        )
+      )
+      setCommentToEdit('')
+      setEditingState({isEditing:false, cId:null, rId: null})
+    }
+
+  }
 
   return (
     <main>
@@ -146,18 +168,30 @@ function App() {
             </div>
             {comment.user.username === myUser.username ? (
               <MyUserIcons
-                click={() => handleDeleteCModal(comment.id)} />
+                deleteClick={() => handleDeleteCModal(comment.id)}
+                editClick={() => editButton(comment.id)}
+              />
             ) : (
               <ReplyButton
-                click={() => replyButton(comment.id, null)} />
+                click={() => replyButton(comment.id, null)}
+              />
             )}
           </div>
           {replyState.isReplying && replyState.commentId === comment.id && replyState.replyId === null && (
             <Form
               submit={handleReply}
               change={(e) => setInputComment(e.target.value)}
-              text={'Reply'} 
-              value={inputComment}/>
+              text={'Reply'}
+              value={inputComment} />
+          )}
+          {editingState.isEditing && editingState.cId === comment.id && editingState.rId === null && (
+            <Form
+            text={'UPDATE'}
+            value={commentToEdit}
+            change={(e) => setCommentToEdit(e.target.value)}
+            submit={handleEditform}
+
+            />
           )}
           <div className="thread" key={comment.id}>
             {comment.replies && comment.replies.map(reply => (
@@ -177,7 +211,7 @@ function App() {
                           click={() => handleDeleteRModal(comment.id, reply.id)} />
                       ) : (
                         <ReplyButton
-                          click={() => replyButton(comment.id, reply.id)} />
+                          deleteClick={() => replyButton(comment.id, reply.id)} />
                       )}
                     </div>
                     <p className='reply-comment'><span className='reply-to'> @{reply.replyingTo}</span>{reply.content}</p>

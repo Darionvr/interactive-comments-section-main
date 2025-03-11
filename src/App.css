@@ -93,6 +93,7 @@ main {
 
 .reply svg {
   fill: var(--Moderateblue);
+  margin-right: .5rem;
 }
 
 .reply:hover {
@@ -198,6 +199,7 @@ main {
 }
 .delete svg{
   fill: var(--SoftRed);
+  margin-right: .5rem;
 }
 .delete:hover{
   cursor: pointer;
@@ -215,6 +217,7 @@ main {
 }
 .edit svg{
   fill: var(--Moderateblue);
+  margin-right: .5rem;
 }
 .edit:hover{
   cursor: pointer;
