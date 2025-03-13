@@ -246,7 +246,7 @@ function App() {
                           editClick={() => editReplyButton(comment.id, reply.id)} />
                       ) : (
                         <ReplyButton
-                          deleteClick={() => replyButton(comment.id, reply.id)}
+                          click={() => replyButton(comment.id, reply.id)}
                         />
                       )}
                     </div>
