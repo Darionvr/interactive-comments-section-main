@@ -22,7 +22,7 @@ function App() {
   const [inputComment, setInputComment] = useState('')
   const [replyState, setReplyState] = useState({ isReplying: false, commentId: null, replyId: null });
   const [commentToEdit, setCommentToEdit] = useState('')
-  const [editingState, setEditingState] = useState({isEditing:false, cId:null, rId: null})
+  const [editingState, setEditingState] = useState({ isEditing: false, cId: null, rId: null })
 
 
 
@@ -126,22 +126,55 @@ function App() {
     setDeleteRModal({ isOpen: true, commentId, replyId });
   };
 
-  const editButton = (commentId) => {
+  const editCommentButton = (commentId) => {
     const selectedComment = comments.find(comment => comment.id === commentId)
     setCommentToEdit(selectedComment.content)
-    setEditingState({isEditing:true, cId: commentId, rId: null})
+    setEditingState({ isEditing: true, cId: commentId, rId: null })
 
   }
-  const handleEditform = (e) => {
-    if(editingState.cId != null){
+
+  const editReplyButton = (commentId, replyId) => {
+
+    const selectedComment = comments.find(comment => comment.id === commentId)
+    const filteredReply = selectedComment.replies.find(reply => reply.id === replyId)
+    setCommentToEdit(filteredReply.content)
+    setEditingState({ isEditing: true, cId: commentId, rId: replyId })
+  }
+
+  const submitEditedReply = (e) => {
+    if(editingState.cId != null && editingState.rId != null){
       e.preventDefault()
-      setComments(prevcomments => 
+      setComments(prevComments =>
+        prevComments.map(comment => {
+          if(comment.id === editingState.cId){
+            return{
+              ...comment,
+              replies: comment.replies.map(reply => 
+                reply.id === editingState.rId 
+                  ? { ...reply, content: commentToEdit } 
+                  : reply
+              )
+            };
+          }
+          return comment; 
+        })
+      )
+      setCommentToEdit('')
+      setEditingState({ isEditing: false, cId: null, rId: null })
+    }
+  }
+
+
+  const submitEditedComment = (e) => {
+    if (editingState.cId != null && editingState.rId === null) {
+      e.preventDefault()
+      setComments(prevcomments =>
         prevcomments.map(comment =>
-          comment.id === editingState.cId ? {...comment, content: commentToEdit} : comment
+          comment.id === editingState.cId ? { ...comment, content: commentToEdit } : comment
         )
       )
       setCommentToEdit('')
-      setEditingState({isEditing:false, cId:null, rId: null})
+      setEditingState({ isEditing: false, cId: null, rId: null })
     }
 
   }
@@ -169,7 +202,7 @@ function App() {
             {comment.user.username === myUser.username ? (
               <MyUserIcons
                 deleteClick={() => handleDeleteCModal(comment.id)}
-                editClick={() => editButton(comment.id)}
+                editClick={() => editCommentButton(comment.id)}
               />
             ) : (
               <ReplyButton
@@ -186,13 +219,14 @@ function App() {
           )}
           {editingState.isEditing && editingState.cId === comment.id && editingState.rId === null && (
             <Form
-            text={'UPDATE'}
-            value={commentToEdit}
-            change={(e) => setCommentToEdit(e.target.value)}
-            submit={handleEditform}
+              text={'UPDATE'}
+              value={commentToEdit}
+              change={(e) => setCommentToEdit(e.target.value)}
+              submit={submitEditedComment}
 
             />
           )}
+
           <div className="thread" key={comment.id}>
             {comment.replies && comment.replies.map(reply => (
               <React.Fragment key={reply.id}>
@@ -208,10 +242,12 @@ function App() {
                       <p>{reply.createdAt}</p>
                       {reply.user.username === myUser.username ? (
                         <MyUserIcons
-                          click={() => handleDeleteRModal(comment.id, reply.id)} />
+                          click={() => handleDeleteRModal(comment.id, reply.id)}
+                          editClick={() => editReplyButton(comment.id, reply.id)} />
                       ) : (
                         <ReplyButton
-                          deleteClick={() => replyButton(comment.id, reply.id)} />
+                          deleteClick={() => replyButton(comment.id, reply.id)}
+                        />
                       )}
                     </div>
                     <p className='reply-comment'><span className='reply-to'> @{reply.replyingTo}</span>{reply.content}</p>
@@ -221,6 +257,15 @@ function App() {
                         clickYes={() => deleteReplies(comment.id, reply.id)}
                         clickNo={() => setDeleteRModal(false)}
                         text={'reply'} />
+                    )}
+                    {editingState.isEditing && editingState.cId === comment.id && editingState.rId === reply.id && (
+                      <Form
+                        text={'UPDATE'}
+                        value={commentToEdit}
+                        change={(e) => setCommentToEdit(e.target.value)}
+                        submit={submitEditedReply}
+
+                      />
                     )}
                   </div>
                 </div>
