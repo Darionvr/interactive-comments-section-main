@@ -242,7 +242,7 @@ function App() {
                       <p>{reply.createdAt}</p>
                       {reply.user.username === myUser.username ? (
                         <MyUserIcons
-                          click={() => handleDeleteRModal(comment.id, reply.id)}
+                          deleteClick={() => handleDeleteRModal(comment.id, reply.id)}
                           editClick={() => editReplyButton(comment.id, reply.id)} />
                       ) : (
                         <ReplyButton
