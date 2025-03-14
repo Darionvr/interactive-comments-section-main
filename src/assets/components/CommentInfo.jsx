@@ -9,7 +9,7 @@ const {myUser} = useContext(CommentContext)
     return (
 
         <div className="comment-info">
-            <img className='user-avatar' src={comment.user.image.png} alt="user avatar" />
+            <img className='user-avatar' src={comment.user.image.png} alt={`${comment.user.username}-avatar`} />
             <p className='user-name'>{comment.user.username}</p>
             {comment.user.username === myUser.username ? <p className='you'> You </p> : ''}
             <p>{comment.createdAt}</p>

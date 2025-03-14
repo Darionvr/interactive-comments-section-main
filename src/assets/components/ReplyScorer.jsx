@@ -20,9 +20,9 @@ const {setComments, comments} = useContext(CommentContext)
 
     return (
         <div className='scorer'>
-            <img onClick={() => handleReplyScore(comment.id, reply.id, 1)} src="images/icon-plus.svg" alt="Plus" />
+            <img onClick={() => handleReplyScore(comment.id, reply.id, 1)} src="images/icon-plus.svg" alt="Plus icon" />
             <p className='score'> {reply.score} </p>
-            <img onClick={() => handleReplyScore(comment.id, reply.id, -1)} src="images/icon-minus.svg" alt="Minus" />
+            <img onClick={() => handleReplyScore(comment.id, reply.id, -1)} src="images/icon-minus.svg" alt="Minus icon" />
         </div>
     )
 }

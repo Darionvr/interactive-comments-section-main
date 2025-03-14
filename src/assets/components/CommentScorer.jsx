@@ -20,10 +20,10 @@ const CommentScorer = ({comment}) => {
 
   return (
     <div className='scorer'>
-    <img onClick={() => handleCommentScore(comment.id, 1)} src="images/icon-plus.svg" alt="Plus" />
+    <img onClick={() => handleCommentScore(comment.id, 1)} src="images/icon-plus.svg" alt="Plus icon" />
     
     <p className='score'> {comment.score} </p>
-    <img onClick={() => handleCommentScore(comment.id, -1)} src="images/icon-minus.svg" alt="Minus" />
+    <img onClick={() => handleCommentScore(comment.id, -1)} src="images/icon-minus.svg" alt="Minus icon" />
   </div>
   )
 }
