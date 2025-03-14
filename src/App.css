@@ -114,6 +114,7 @@ main {
 .add-comment {
   display: flex;
   align-items: start;
+  position: relative;
   background-color: var(--White);
   border-radius: 15px;
   color: var(--GrayishBlue);
@@ -327,5 +328,15 @@ textarea {
   }
 .reply-comment{
   width: clamp(300px, 50ch, 50vw)
+}
+.add-comment{
+  flex-direction:column-reverse;
+  
+
+}
+.send{
+  position: absolute;
+  right: 0;
+  
 }
 }
